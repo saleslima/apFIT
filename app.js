@@ -152,6 +152,9 @@ function showStudentView(alunoId, alunoNome) {
     
     // Load student's workouts
     loadStudentTreinos(alunoId);
+    
+    // Add input event listeners to convert text to uppercase
+    setupUppercaseInputs();
 }
 
 function hideStudentView() {
@@ -161,6 +164,48 @@ function hideStudentView() {
     document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('d-none');
     });
+}
+
+function renderExerciciosTreino(exercicios, dataCriacao) {
+    if (!exercicios || exercicios.length === 0) {
+        return '<li class="list-group-item">Nenhum exercício cadastrado</li>';
+    }
+    
+    // Calculate days since creation if dataCriacao exists
+    let daysInfo = '';
+    if (dataCriacao) {
+        const creationDate = new Date(dataCriacao);
+        const today = new Date();
+        const diffTime = Math.abs(today - creationDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        daysInfo = `<div class="badge bg-info text-white mb-2">Treino ativo há ${diffDays} dias</div>`;
+    }
+    
+    return `
+        ${daysInfo}
+        ${exercicios.map(ex => {
+            // Get image URL from the exercises list if available
+            let imagemHTML = '';
+            if (ex.imagemURL) {
+                imagemHTML = `<img src="${ex.imagemURL}" class="exercicio-imagem-treino" alt="${ex.nomeExercicio}">`;
+            }
+            
+            return `
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            ${imagemHTML}
+                            <strong>${ex.nomeExercicio}</strong>
+                        </div>
+                        <div>
+                            ${ex.series} séries × ${ex.repeticoes} repetições | Descanso: ${ex.descanso}s
+                        </div>
+                    </div>
+                    ${ex.observacoes ? `<small class="text-muted">${ex.observacoes}</small>` : ''}
+                </li>
+            `;
+        }).join('')}
+    `;
 }
 
 function loadStudentTreinos(alunoId) {
@@ -191,7 +236,7 @@ function loadStudentTreinos(alunoId) {
                         <p><strong>Dias:</strong> ${diasSemana || 'Não especificado'}</p>
                         <p><strong>Exercícios:</strong></p>
                         <ul class="list-group mb-3">
-                            ${renderExerciciosTreino(treino.exercicios)}
+                            ${renderExerciciosTreino(treino.exercicios, treino.dataCriacao)}
                         </ul>
                         ${treino.observacoes ? `<p><strong>Observações:</strong> ${treino.observacoes}</p>` : ''}
                     </div>
@@ -221,6 +266,9 @@ function showApp() {
         // Show dashboard by default
         showSection(dashboardSection);
     }
+    
+    // Add input event listeners to convert text to uppercase
+    setupUppercaseInputs();
 }
 
 function handleSaveAluno() {
@@ -618,7 +666,7 @@ function loadTreinosForAluno(alunoId) {
                         <p><strong>Dias:</strong> ${diasSemana || 'Não especificado'}</p>
                         <p><strong>Exercícios:</strong></p>
                         <ul class="list-group mb-3">
-                            ${renderExerciciosTreino(treino.exercicios)}
+                            ${renderExerciciosTreino(treino.exercicios, treino.dataCriacao)}
                         </ul>
                         ${treino.observacoes ? `<p><strong>Observações:</strong> ${treino.observacoes}</p>` : ''}
                     </div>
@@ -634,35 +682,6 @@ function loadTreinosForAluno(alunoId) {
             treinosContainer.innerHTML = '<div class="alert alert-info">Este aluno ainda não possui treinos cadastrados.</div>';
         }
     });
-}
-
-function renderExerciciosTreino(exercicios) {
-    if (!exercicios || exercicios.length === 0) {
-        return '<li class="list-group-item">Nenhum exercício cadastrado</li>';
-    }
-    
-    return exercicios.map(ex => {
-        // Get image URL from the exercises list if available
-        let imagemHTML = '';
-        if (ex.imagemURL) {
-            imagemHTML = `<img src="${ex.imagemURL}" class="exercicio-imagem-treino" alt="${ex.nomeExercicio}">`;
-        }
-        
-        return `
-            <li class="list-group-item">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        ${imagemHTML}
-                        <strong>${ex.nomeExercicio}</strong>
-                    </div>
-                    <div>
-                        ${ex.series} séries × ${ex.repeticoes} repetições | Descanso: ${ex.descanso}s
-                    </div>
-                </div>
-                ${ex.observacoes ? `<small class="text-muted">${ex.observacoes}</small>` : ''}
-            </li>
-        `;
-    }).join('');
 }
 
 function handleSaveTreino() {
@@ -1088,6 +1107,26 @@ async function deleteExerciseImage(exercicioId) {
     }
 }
 
+// Function to setup uppercase transformation for all inputs
+function setupUppercaseInputs() {
+    // Apply to all text inputs, textareas, and select elements
+    const inputElements = document.querySelectorAll('input[type="text"], textarea');
+    inputElements.forEach(input => {
+        // Convert existing value to uppercase
+        if (input.value) {
+            input.value = input.value.toUpperCase();
+        }
+        
+        // Add event listener for future input
+        input.addEventListener('input', function() {
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            this.value = this.value.toUpperCase();
+            this.setSelectionRange(start, end);
+        });
+    });
+}
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     console.log("App initialized"); // Debug logging
@@ -1134,6 +1173,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const exercicioItem = e.target.closest('.exercicio-item');
             if (exerciciosContainer.children.length > 1) {
                 exercicioItem.remove();
+            }
+        }
+    });
+    
+    // Setup event delegation for dynamically added inputs
+    document.addEventListener('focusin', function(e) {
+        if ((e.target.tagName === 'INPUT' && e.target.type === 'text') || 
+            e.target.tagName === 'TEXTAREA') {
+            // Skip inputs in auth section
+            if (!authSection.contains(e.target)) {
+                // Add input event if not already added
+                if (!e.target.dataset.uppercaseHandler) {
+                    e.target.dataset.uppercaseHandler = 'true';
+                    e.target.addEventListener('input', function() {
+                        const start = this.selectionStart;
+                        const end = this.selectionEnd;
+                        this.value = this.value.toUpperCase();
+                        this.setSelectionRange(start, end);
+                    });
+                    
+                    // Convert existing value
+                    if (e.target.value) {
+                        e.target.value = e.target.value.toUpperCase();
+                    }
+                }
             }
         }
     });
