@@ -1,0 +1,211 @@
+<!-- Modal de Aluno -->
+<div class="modal fade" id="alunoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alunoModalLabel">Adicionar Aluno</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="aluno-form">
+                    <input type="hidden" id="aluno-id">
+                    <div class="mb-3">
+                        <label for="aluno-nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="aluno-nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="aluno-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="aluno-email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="aluno-senha" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="aluno-senha" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="aluno-telefone" class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" id="aluno-telefone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="aluno-observacoes" class="form-label">Observações</label>
+                        <textarea class="form-control" id="aluno-observacoes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="salvar-aluno">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Exercício -->
+<div class="modal fade" id="exercicioModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exercicioModalLabel">Adicionar Exercício</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="exercicio-form">
+                    <input type="hidden" id="exercicio-id">
+                    <div class="mb-3">
+                        <label for="exercicio-nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="exercicio-nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exercicio-grupo" class="form-label">Grupo Muscular</label>
+                        <select class="form-control" id="exercicio-grupo" required>
+                            <option value="">Selecione...</option>
+                            <option value="Peito">Peito</option>
+                            <option value="Costas">Costas</option>
+                            <option value="Pernas">Pernas</option>
+                            <option value="Ombros">Ombros</option>
+                            <option value="Braços">Braços</option>
+                            <option value="Abdômen">Abdômen</option>
+                            <option value="Cardio">Cardio</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exercicio-descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="exercicio-descricao" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exercicio-imagem" class="form-label">Imagem/GIF do Exercício</label>
+                        <input type="file" class="form-control" id="exercicio-imagem" accept="image/*,.gif">
+                        <div class="mt-2" id="imagem-preview-container">
+                            <img id="imagem-preview" class="img-fluid d-none" alt="Preview da imagem">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="salvar-exercicio">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Treino -->
+<div class="modal fade" id="treinoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="treinoModalLabel">Criar Treino</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="treino-form">
+                    <input type="hidden" id="treino-id">
+                    <input type="hidden" id="treino-aluno-id">
+                    <div class="mb-3">
+                        <label for="treino-nome" class="form-label">Nome do Treino</label>
+                        <input type="text" class="form-control" id="treino-nome" required placeholder="Ex: Treino A - Peito e Tríceps">
+                    </div>
+                    <div class="mb-3">
+                        <label for="treino-dias" class="form-label">Dias da Semana</label>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Segunda" id="dia-segunda">
+                                    <label class="form-check-label" for="dia-segunda">Segunda</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Terça" id="dia-terca">
+                                    <label class="form-check-label" for="dia-terca">Terça</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Quarta" id="dia-quarta">
+                                    <label class="form-check-label" for="dia-quarta">Quarta</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Quinta" id="dia-quinta">
+                                    <label class="form-check-label" for="dia-quinta">Quinta</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Sexta" id="dia-sexta">
+                                    <label class="form-check-label" for="dia-sexta">Sexta</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Sábado" id="dia-sabado">
+                                    <label class="form-check-label" for="dia-sabado">Sábado</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Domingo" id="dia-domingo">
+                                    <label class="form-check-label" for="dia-domingo">Domingo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Exercícios</label>
+                        <div id="exercicios-container">
+                            <div class="exercicio-item card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <label class="form-label">Exercício</label>
+                                            <select class="form-control exercicio-select" required>
+                                                <option value="">Selecione...</option>
+                                                <!-- Opções serão adicionadas via JavaScript -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <label class="form-label">Séries</label>
+                                            <input type="number" class="form-control exercicio-series" min="1" required>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <label class="form-label">Repetições</label>
+                                            <input type="text" class="form-control exercicio-repeticoes" required placeholder="Ex: 12-15">
+                                        </div>
+                                        <div class="col-md-3 mb-2">
+                                            <label class="form-label">Descanso (seg)</label>
+                                            <input type="number" class="form-control exercicio-descanso" min="0" required>
+                                        </div>
+                                        <div class="col-md-1 d-flex align-items-end mb-2">
+                                            <button type="button" class="btn btn-danger btn-sm remover-exercicio">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label">Observações</label>
+                                            <textarea class="form-control exercicio-obs" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary w-100" id="adicionar-exercicio">Adicionar Exercício</button>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="treino-observacoes" class="form-label">Observações Gerais</label>
+                        <textarea class="form-control" id="treino-observacoes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="salvar-treino">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

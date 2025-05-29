@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gerenciar Treinos</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#treinoModal">Criar Treino</button>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5>Alunos</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group" id="alunos-list">
+                    <!-- A lista de alunos aparecerá aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div id="treino-info" class="d-none">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 id="aluno-nome-treino">Treino de [Nome do Aluno]</h5>
+                    <button class="btn btn-sm btn-light" id="btn-adicionar-treino">Adicionar Treino</button>
+                </div>
+                <div class="card-body">
+                    <div id="treinos-container">
+                        <!-- Os treinos do aluno aparecerão aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="treino-empty" class="text-center p-5">
+            <h4>Selecione um aluno para gerenciar seus treinos</h4>
+        </div>
+    </div>
+</div>
