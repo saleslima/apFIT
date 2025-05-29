@@ -1,0 +1,183 @@
+body {
+    background-color: #f5f5f5;
+    padding-bottom: 30px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.content-section {
+    margin-bottom: 30px;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+}
+
+/* Auth section styling */
+#auth-section {
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+#auth-section .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#auth-toggle {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#auth-toggle:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard styling */
+#dashboard-section .card {
+    transition: transform 0.3s;
+}
+
+#dashboard-section .card:hover {
+    transform: translateY(-5px);
+}
+
+/* Table styling */
+.table th {
+    background-color: #f8f9fa;
+}
+
+/* Form styling */
+label {
+    font-weight: 500;
+}
+
+/* List group styling for alunos in treinos section */
+#alunos-list .list-group-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#alunos-list .list-group-item:hover {
+    background-color: #f0f0f0;
+}
+
+#alunos-list .list-group-item.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Treino card styling */
+#treinos-container .card {
+    margin-bottom: 15px;
+}
+
+/* Exercicio item styling in treino form */
+.exercicio-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+/* Imagem de exercício */
+#imagem-preview {
+    max-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.exercicio-imagem-tabela {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.exercicio-imagem-treino {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .btn {
+        padding: 0.375rem 0.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .table th, .table td {
+        padding: 0.5rem;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .exercicio-imagem-tabela {
+        width: 40px;
+        height: 40px;
+    }
+    
+    #navbar .container-fluid {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    /* Hide less important columns on small screens */
+    .hide-on-mobile {
+        display: none;
+    }
+    
+    /* Full width buttons on mobile */
+    .btn-block-xs {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    #auth-section {
+        margin: 20px 10px;
+    }
+    
+    .row {
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+    
+    .col, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-8 {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
