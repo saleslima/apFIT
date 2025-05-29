@@ -94,7 +94,7 @@ function handleAuth(e) {
     console.log("Login attempt with:", email); // Debug logging
     
     // Check if credentials match the admin account
-    if (email === 'dejemcopomsp@gmail.com' && password === 'personal') {
+    if (email === 'fit@gmail.com' && password === 'personal') {
         // Direct admin login
         currentUser = { email: email, uid: 'admin-user' };
         userRole = 'admin';
