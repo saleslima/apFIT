@@ -98,6 +98,11 @@ function handleAuth(e) {
         // Direct admin login
         currentUser = { email: email, uid: 'admin-user' };
         userRole = 'admin';
+        
+        // Save to localStorage for persistent login
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        localStorage.setItem('userRole', userRole);
+        
         showApp();
         loadDashboardData();
         authForm.reset();
@@ -114,6 +119,12 @@ function handleAuth(e) {
                         authenticated = true;
                         currentUser = { email: email, uid: childSnapshot.key };
                         userRole = 'student';
+                        
+                        // Save to localStorage for persistent login
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        localStorage.setItem('userRole', userRole);
+                        localStorage.setItem('studentName', aluno.nome);
+                        
                         showStudentView(childSnapshot.key, aluno.nome);
                         authForm.reset();
                     }
@@ -128,6 +139,11 @@ function handleAuth(e) {
 }
 
 function handleLogout() {
+    // Clear localStorage
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('studentName');
+    
     currentUser = null;
     userRole = null;
     hideApp();
@@ -733,9 +749,13 @@ function handleSaveTreino() {
         nome,
         dias,
         exercicios,
-        observacoes,
-        dataCriacao: treinoId ? undefined : Date.now()
+        observacoes
     };
+    
+    // Only add creation date for new treinos, not when updating
+    if (!treinoId) {
+        treinoData.dataCriacao = Date.now();
+    }
     
     let treinoRef;
     
@@ -1201,4 +1221,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+    
+    // Check for existing login on page load
+    const savedUser = localStorage.getItem('currentUser');
+    const savedRole = localStorage.getItem('userRole');
+    
+    if (savedUser && savedRole) {
+        currentUser = JSON.parse(savedUser);
+        userRole = savedRole;
+        
+        if (userRole === 'admin') {
+            showApp();
+            loadDashboardData();
+        } else if (userRole === 'student') {
+            const studentName = localStorage.getItem('studentName') || 'Aluno';
+            showStudentView(currentUser.uid, studentName);
+        }
+    }
 });

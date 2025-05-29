@@ -51,7 +51,12 @@ body {
 /* Auth section styling */
 #auth-section {
     max-width: 500px;
-    margin: 50px auto;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
 }
 
 #auth-section .card {
@@ -146,6 +151,25 @@ label {
     display: inline-block;
 }
 
+/* Override Bootstrap primary color to be red */
+.bg-primary {
+    background-color: #dc3545 !important;
+}
+
+.btn-primary {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+
+.btn-primary:hover {
+    background-color: #c82333 !important;
+    border-color: #bd2130 !important;
+}
+
+.navbar-dark .nav-link.active {
+    color: #dc3545 !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .card-body {
@@ -197,7 +221,12 @@ label {
 
 @media (max-width: 576px) {
     #auth-section {
-        margin: 20px 10px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
     }
     
     .row {
